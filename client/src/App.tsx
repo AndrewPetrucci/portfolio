@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { getProfile, getProjects, sendMessage } from './api'
+import { ThemeSettings } from './components/ThemeSettings'
 import type { Profile, Project } from './types'
 import './App.css'
 
@@ -50,11 +51,14 @@ function App() {
         <a className="mark" href="#top">
           AP
         </a>
-        <nav>
-          <a href="#work">Work</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <div className="nav-end">
+          <nav className="nav-links">
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <ThemeSettings />
+        </div>
       </header>
 
       {loadError && <p className="banner">{loadError}</p>}

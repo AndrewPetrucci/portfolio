@@ -26,7 +26,11 @@ body {
   font-family: var(--sans);
   color: var(--ink);
   background:
-    radial-gradient(1200px 500px at 10% -10%, #2a2718 0%, transparent 55%),
+    radial-gradient(
+      1200px 500px at 10% -10%,
+      color-mix(in srgb, var(--accent) 18%, var(--bg)) 0%,
+      transparent 55%
+    ),
     var(--bg);
 }
 

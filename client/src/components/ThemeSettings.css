@@ -1,0 +1,141 @@
+.theme-settings {
+  position: relative;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 0;
+  border: 0px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.theme-toggle:hover,
+.theme-toggle[aria-expanded='true'] {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+.theme-panel {
+  position: absolute;
+  top: calc(100% + 0.7rem);
+  right: 0;
+  width: min(20.5rem, calc(100vw - 2.5rem));
+  padding: 0.9rem;
+  background: var(--bg-raise);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--bg) 70%, black);
+  z-index: 4;
+}
+
+.theme-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.theme-panel-head h2 {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+
+.theme-reset {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.theme-presets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+  margin: 0 0 0.9rem;
+}
+
+.theme-presets button {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+}
+
+.theme-presets button:hover,
+.theme-presets button.is-active {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+.theme-swatches {
+  display: flex;
+  gap: 0.18rem;
+}
+
+.theme-swatches i {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--ink) 28%, transparent);
+}
+
+.theme-list {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.theme-list label {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.theme-list input[type='color'] {
+  width: 1.7rem;
+  height: 1.7rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.35rem;
+  background: none;
+  cursor: pointer;
+}
+
+.theme-list input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.theme-list input[type='color']::-webkit-color-swatch {
+  border: 0;
+  border-radius: 0.25rem;
+}
+
+.theme-list code {
+  min-width: 4.8rem;
+  font-size: 0.72rem;
+  color: var(--ink);
+}
