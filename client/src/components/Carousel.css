@@ -1,0 +1,136 @@
+.carousel-scene {
+  position: relative;
+  perspective: 80rem;
+  perspective-origin: 50% 45%;
+  display: grid;
+  justify-items: center;
+  padding: 2.5rem 0 1rem;
+  min-height: 24rem;
+}
+
+.carousel-tilt {
+  --rx: 0deg;
+  --rz: 0deg;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateZ(var(--rz));
+}
+
+.carousel {
+  --n: 1;
+  --theta: 0deg;
+  --item-width: 16.5rem;
+  --radius: calc(var(--item-width) / (2 * tan(180deg / max(var(--n), 2))) + 1.25rem);
+  position: relative;
+  width: var(--item-width);
+  height: 20rem;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--theta));
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.carousel > * {
+  --i: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--item-width);
+  transform: rotateY(calc(var(--i) * 360deg / var(--n))) translateZ(var(--radius));
+}
+
+.carousel-sliders {
+  --pad-size: 80px;
+  --slider-height: 5px;
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  z-index: 2;
+  width: var(--pad-size);
+  height: var(--pad-size);
+}
+
+.carousel-sliders label {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--pad-size);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.carousel-sliders label span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.carousel-slider-x {
+  left: auto;
+  right: 0;
+  transform: rotate(90deg);
+  margin-bottom: 10px;
+  transform-origin: right bottom;
+}
+
+.carousel-sliders input[type='range'] {
+  width: 100%;
+  height: var(--slider-height);
+  appearance: none;
+  background: transparent;
+  accent-color: var(--accent);
+}
+
+.carousel-sliders input[type='range']::-webkit-slider-runnable-track {
+  height: var(--slider-height);
+  background: var(--line);
+  border-radius: 999px;
+}
+
+.carousel-sliders input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  width: var(--slider-height);
+  height: var(--slider-height);
+  margin-top: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.carousel-sliders input[type='range']::-moz-range-track {
+  height: var(--slider-height);
+  background: var(--line);
+  border: 0;
+  border-radius: 999px;
+}
+
+.carousel-sliders input[type='range']::-moz-range-thumb {
+  width: var(--slider-height);
+  height: var(--slider-height);
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.carousel-nav {
+  display: flex;
+  gap: 0.75rem;
+}
+
+@media (max-width: 700px) {
+  .carousel {
+    --item-width: 14rem;
+    height: 22rem;
+  }
+}

@@ -29,15 +29,15 @@ export type Project = {
 
 export const profile: Profile = {
   name: 'Andrew Petrucci',
-  title: 'Full-stack developer',
+  title: 'Senior Front-End/Full-stack developer',
   location: 'Available for new work',
-  email: 'hello@example.com',
+  email: 'andrewpetrucci@gmail.com',
   summary:
-    'I build web applications with React and Node.js — from polished interfaces to the APIs that power them. This site is a starting point you can replace with your own work, copy, and links.',
+    'I build web applications with React and Node.js — from polished interfaces to the APIs that power them.',
   socials: [
-    { label: 'GitHub', href: 'https://github.com' },
-    { label: 'LinkedIn', href: 'https://linkedin.com' },
-    { label: 'Email', href: 'mailto:hello@example.com' },
+    { label: 'GitHub', href: 'https://github.com/AndrewPetrucci' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/andrew-petrucci-97a14797/' },
+    { label: 'Email', href: 'mailto:andrewpetrucci@gmail.com' },
   ],
   skills: [
     {
@@ -77,5 +77,26 @@ export const projects: Project[] = [
     description:
       'The contact section posts to /api/contact. Wire this endpoint to email or a database when you are ready to receive messages for real.',
     tags: ['Express', 'Forms'],
+  },
+  {
+    id: 'design-system',
+    title: 'Component library',
+    description:
+      'Placeholder for a shared UI kit — buttons, cards, and theme tokens that keep a React app visually consistent.',
+    tags: ['React', 'TypeScript', 'CSS'],
+  },
+  {
+    id: 'auth-service',
+    title: 'Auth service',
+    description:
+      'Placeholder for signup, login, and session handling behind a small Express API. Swap this card for a real auth project.',
+    tags: ['Node.js', 'Express', 'REST'],
+  },
+  {
+    id: 'dashboard',
+    title: 'Metrics dashboard',
+    description:
+      'Placeholder for a client that charts data from an API. Useful as a stand-in until you have a real analytics or admin view.',
+    tags: ['React', 'Vite', 'JSON'],
   },
 ]
