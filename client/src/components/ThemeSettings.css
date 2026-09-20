@@ -5,10 +5,6 @@
 }
 
 .theme-card-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
   margin-bottom: 0.55rem;
 }
 
@@ -25,11 +21,6 @@
   to {
     background-position: 250% 0;
   }
-}
-
-.theme-reset {
-  font-family: var(--mono);
-  font-size: 0.78rem;
 }
 
 .theme-presets {

@@ -5,7 +5,6 @@ import {
   colorsMatch,
   getColorPresets,
   loadColors,
-  resetColors,
   saveColors,
   type ColorKey,
   type ThemeColors,
@@ -26,10 +25,6 @@ export function ThemeSettings() {
     saveColors(next)
   }
 
-  function handleReset() {
-    setColors(resetColors())
-  }
-
   function applyPreset(next: ThemeColors) {
     setColors({ ...next })
     saveColors(next)
@@ -39,16 +34,6 @@ export function ThemeSettings() {
     <article className="card theme-card" aria-labelledby={titleId}>
       <div className="theme-card-head">
         <h3 id={titleId}>Theme</h3>
-        <a
-          href="#work"
-          className="theme-reset"
-          onClick={(event) => {
-            event.preventDefault()
-            handleReset()
-          }}
-        >
-          Reset
-        </a>
       </div>
       <div className="theme-presets" role="radiogroup" aria-label="Color presets">
         {getColorPresets().map((preset) => {
