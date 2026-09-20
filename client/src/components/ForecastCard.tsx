@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { getForecast } from '../api'
 import type { Forecast } from '../types'
 import { WeatherIcon, weatherLabel } from './WeatherIcon'
@@ -46,7 +46,7 @@ export function ForecastCard() {
   return (
     <article className="card forecast-card">
       <h3>Forecast</h3>
-      {!forecast && !error && <p>Loading local weather…</p>}
+      {!forecast && !error && <ForecastSkeleton />}
       {error && <p>{error}</p>}
       {forecast && (
         <>
@@ -75,5 +75,32 @@ export function ForecastCard() {
         </>
       )}
     </article>
+  )
+}
+
+function ForecastSkeleton() {
+  return (
+    <div className="forecast-skeleton" aria-busy="true" aria-label="Loading local weather">
+      <div className="forecast-now">
+        <span className="forecast-skeleton-bone forecast-skeleton-icon" />
+        <span className="forecast-skeleton-bone forecast-skeleton-temp" />
+        <span className="forecast-skeleton-bone forecast-skeleton-label" />
+      </div>
+      <p className="forecast-place">
+        <span className="forecast-skeleton-bone forecast-skeleton-place" />
+      </p>
+      <ul className="forecast-days">
+        {Array.from({ length: 5 }, (_, index) => (
+          <li key={index} style={{ '--d': `${index * 90}ms` } as CSSProperties}>
+            <span className="forecast-skeleton-bone forecast-skeleton-day" />
+            <span className="forecast-day-condition">
+              <span className="forecast-skeleton-bone forecast-skeleton-icon-sm" />
+              <span className="forecast-skeleton-bone forecast-skeleton-condition" />
+            </span>
+            <span className="forecast-skeleton-bone forecast-skeleton-range" />
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }

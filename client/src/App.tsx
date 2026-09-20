@@ -1,6 +1,6 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { getProfile, getProjects, sendMessage } from './api'
-import { Carousel } from './components/Carousel'
+import { Carousel, type CarouselHandle } from './components/Carousel'
 import { ForecastCard } from './components/ForecastCard'
 import { LavaLampCard } from './components/LavaLampCard'
 import { ProjectCard } from './components/ProjectCard'
@@ -14,6 +14,7 @@ function App() {
   const [loadError, setLoadError] = useState('')
   const [status, setStatus] = useState('')
   const [sending, setSending] = useState(false)
+  const carouselRef = useRef<CarouselHandle>(null)
 
   useEffect(() => {
     Promise.all([getProfile(), getProjects()])
@@ -62,7 +63,6 @@ function App() {
               <a href="#about">About</a>
               <a href="#contact">Contact</a>
             </nav>
-            <ThemeSettings />
           </div>
         </div>
         <div className="nav-bar"></div>
@@ -92,15 +92,24 @@ function App() {
           <div className="section-head">
             <h2>Sample work</h2>
             <p>
-              Loaded from the Express API at <code>/api/projects</code>.
+              <a
+                href="#work"
+                onClick={(event) => {
+                  event.preventDefault()
+                  carouselRef.current?.reset()
+                }}
+              >
+                Reset
+              </a>
             </p>
           </div>
-          <Carousel>
+          <Carousel ref={carouselRef}>
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
-            <ForecastCard />
-            <LavaLampCard />
+            <ThemeSettings key="theme" />
+            <ForecastCard key="forecast" />
+            <LavaLampCard key="lava" />
           </Carousel>
         </section>
 

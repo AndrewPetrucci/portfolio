@@ -29,6 +29,27 @@
   transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.carousel.is-idle {
+  transition: none;
+  animation: carousel-spin calc(var(--n) * 8s) linear infinite;
+}
+
+.carousel.is-restoring {
+  transition: none;
+}
+
+@keyframes carousel-spin {
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel.is-idle {
+    animation: none;
+  }
+}
+
 .carousel > * {
   --i: 0;
   position: absolute;
@@ -121,6 +142,20 @@
   border-radius: 999px;
   background: var(--accent);
   cursor: pointer;
+}
+
+.carousel-slider-readout {
+  position: absolute;
+  right: 0;
+  bottom: calc(var(--slider-height) + 0.25rem);
+  padding-bottom: 2px;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 .carousel-controls {
