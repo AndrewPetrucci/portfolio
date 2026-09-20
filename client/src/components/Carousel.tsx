@@ -1,20 +1,38 @@
-import { Children, useState, type CSSProperties, type ReactNode } from 'react'
+import { Children, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 import './Carousel.css'
 
 type CarouselProps = {
   children: ReactNode
 }
 
+function wrapIndex(value: number, count: number) {
+  return ((value % count) + count) % count
+}
+
+function stepToward(current: number, index: number, count: number) {
+  const currentIndex = wrapIndex(current, count)
+  let delta = index - currentIndex
+  if (delta > count / 2) delta -= count
+  if (delta < -count / 2) delta += count
+  return current + delta
+}
+
 export function Carousel({ children }: CarouselProps) {
   const items = Children.toArray(children)
   const [step, setStep] = useState(0)
-  const [rotateX, setRotateX] = useState(0)
+  const [rotateX, setRotateX] = useState(-9)
   const [rotateZ, setRotateZ] = useState(0)
   const count = items.length
 
   if (!count) return null
 
   const theta = -((step * 360) / count)
+  const activeIndex = wrapIndex(step, count)
+
+  function goTo(index: number, event: MouseEvent<HTMLDivElement>) {
+    if ((event.target as HTMLElement).closest('a, button')) return
+    setStep((current) => stepToward(current, index, count))
+  }
 
   return (
     <div>
@@ -39,7 +57,12 @@ export function Carousel({ children }: CarouselProps) {
             }
           >
             {items.map((child, index) => (
-              <div key={index} style={{ '--i': index } as CSSProperties}>
+              <div
+                key={index}
+                className={index === activeIndex ? 'is-active' : undefined}
+                style={{ '--i': index } as CSSProperties}
+                onClick={(event) => goTo(index, event)}
+              >
                 {child}
               </div>
             ))}
@@ -68,7 +91,7 @@ export function Carousel({ children }: CarouselProps) {
           </label>
         </div>
       </div>
-      {count > 1 && (
+      {/* {count > 1 && (
         <div className="carousel-controls">
           <div className="carousel-nav">
             <button
@@ -87,7 +110,7 @@ export function Carousel({ children }: CarouselProps) {
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   )
 }

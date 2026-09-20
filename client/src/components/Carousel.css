@@ -4,8 +4,9 @@
   perspective-origin: 50% 45%;
   display: grid;
   justify-items: center;
-  padding: 2.5rem 0 1rem;
+  padding: 1rem 0;
   min-height: 24rem;
+  margin-bottom: 2rem;
 }
 
 .carousel-tilt {
@@ -35,6 +36,11 @@
   top: 0;
   width: var(--item-width);
   transform: rotateY(calc(var(--i) * 360deg / var(--n))) translateZ(var(--radius));
+  cursor: pointer;
+}
+
+.carousel > *.is-active {
+  cursor: default;
 }
 
 .carousel-sliders {
@@ -81,6 +87,7 @@
   appearance: none;
   background: transparent;
   accent-color: var(--accent);
+  cursor: pointer;
 }
 
 .carousel-sliders input[type='range']::-webkit-slider-runnable-track {
@@ -97,6 +104,7 @@
   border: 0;
   border-radius: 999px;
   background: var(--accent);
+  cursor: pointer;
 }
 
 .carousel-sliders input[type='range']::-moz-range-track {
@@ -112,6 +120,7 @@
   border: 0;
   border-radius: 999px;
   background: var(--accent);
+  cursor: pointer;
 }
 
 .carousel-controls {

@@ -94,7 +94,7 @@ export function ThemeSettings() {
           aria-labelledby={titleId}
         >
           <div className="theme-panel-head">
-            <h2 id={titleId}>Colors</h2>
+            <h2 id={titleId}>Theme</h2>
             <button type="button" className="theme-reset" onClick={handleReset}>
               Reset
             </button>

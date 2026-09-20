@@ -1,0 +1,87 @@
+.lava-lamp {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 10rem;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.lava-lamp-goo {
+  position: absolute;
+  inset: -4rem;
+  background: black;
+  filter: blur(22px) contrast(30);
+}
+
+.lava-pool {
+  position: absolute;
+  left: 50%;
+  width: 78%;
+  height: 6.5rem;
+  border-radius: 50%;
+  corner-shape: round;
+  background: var(--accent);
+  transform: translateX(-50%);
+}
+
+.lava-pool-top {
+  top: -1.8rem;
+}
+
+.lava-pool-bottom {
+  bottom: -1.8rem;
+}
+
+.lava-blob {
+  position: absolute;
+  left: var(--left);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  corner-shape: round;
+  background: var(--accent);
+  animation-duration: var(--duration);
+  animation-delay: var(--delay);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.lava-blob-top {
+  animation-name: lava-down;
+}
+
+.lava-blob-bottom {
+  animation-name: lava-up;
+}
+
+@keyframes lava-down {
+  from {
+    top: calc(var(--size) * -1.5);
+    transform: translateX(0);
+  }
+
+  to {
+    top: 115%;
+    transform: translateX(var(--drift));
+  }
+}
+
+@keyframes lava-up {
+  from {
+    top: 115%;
+    transform: translateX(0);
+  }
+
+  to {
+    top: calc(var(--size) * -1.5);
+    transform: translateX(var(--drift));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lava-blob {
+    animation: none;
+    top: 42%;
+  }
+}

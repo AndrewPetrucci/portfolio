@@ -1,4 +1,4 @@
-import type { Profile, Project } from './types'
+import type { Forecast, Profile, Project } from './types'
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, {
@@ -24,6 +24,19 @@ export function getProfile() {
 
 export function getProjects() {
   return request<Project[]>('/api/projects')
+}
+
+export function getForecast(
+  lat: number,
+  lon: number,
+  unit: 'celsius' | 'fahrenheit' = 'celsius',
+) {
+  const params = new URLSearchParams({
+    lat: String(lat),
+    lon: String(lon),
+    unit,
+  })
+  return request<Forecast>(`/api/forecast?${params}`)
 }
 
 export function sendMessage(body: { name: string; email: string; message: string }) {

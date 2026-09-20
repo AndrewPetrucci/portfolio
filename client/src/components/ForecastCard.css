@@ -1,0 +1,71 @@
+.forecast-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.forecast-card .forecast-now {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.forecast-now-label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.forecast-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.forecast-now .forecast-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.forecast-place {
+  margin: 0.15rem 0 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.forecast-days {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.forecast-days li {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr) auto;
+  gap: 0.45rem;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.forecast-day-condition {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.forecast-day-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.forecast-days li span:last-child {
+  color: var(--ink);
+}

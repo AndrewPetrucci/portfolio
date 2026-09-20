@@ -47,7 +47,13 @@
   margin: 0;
   font-size: 0.95rem;
   letter-spacing: 0;
+  background: linear-gradient(100deg, orange, red, purple, blue, orange);
+  background-clip: text;
+  background-size: 250% 100%;
+  color: transparent;
+  animation: flow 5s linear infinite;
 }
+@keyframes flow { to { background-position: 250% 0; } }
 
 .theme-reset {
   border: 0;
@@ -100,7 +106,7 @@
 
 .theme-list {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.25rem;
   margin: 0;
   padding: 0;
   list-style: none;

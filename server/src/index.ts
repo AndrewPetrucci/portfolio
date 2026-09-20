@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { fetchForecast } from './forecast.js'
 import { profile, projects } from './data/portfolio.js'
 
 dotenv.config()
@@ -42,6 +43,29 @@ app.get('/api/profile', (_req, res) => {
 
 app.get('/api/projects', (_req, res) => {
   res.json(projects)
+})
+
+app.get('/api/forecast', async (req, res) => {
+  const latitude = Number(req.query.lat)
+  const longitude = Number(req.query.lon)
+  const unit = req.query.unit === 'fahrenheit' ? 'fahrenheit' : 'celsius'
+
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+    res.status(400).json({ error: 'Latitude and longitude are required.' })
+    return
+  }
+
+  if (Math.abs(latitude) > 90 || Math.abs(longitude) > 180) {
+    res.status(400).json({ error: 'That location looks invalid.' })
+    return
+  }
+
+  try {
+    const forecast = await fetchForecast(latitude, longitude, unit)
+    res.json(forecast)
+  } catch {
+    res.status(502).json({ error: 'Could not load the forecast.' })
+  }
 })
 
 app.post('/api/contact', (req, res) => {

@@ -142,7 +142,7 @@ export function getDefaultColors(): ThemeColors {
 
 export function getColorPresets(): ColorPreset[] {
   return [
-    { id: 'atelier', name: 'Atelier', colors: getDefaultColors() },
+    { id: 'phosphor', name: 'Phosphor', colors: getDefaultColors() },
     ...STATIC_PRESETS,
   ]
 }

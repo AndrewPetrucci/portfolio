@@ -1,0 +1,6 @@
+.lava-lamp-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 18rem;
+  overflow: hidden;
+}

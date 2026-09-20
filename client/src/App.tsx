@@ -1,6 +1,8 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { getProfile, getProjects, sendMessage } from './api'
 import { Carousel } from './components/Carousel'
+import { ForecastCard } from './components/ForecastCard'
+import { LavaLampCard } from './components/LavaLampCard'
 import { ProjectCard } from './components/ProjectCard'
 import { ThemeSettings } from './components/ThemeSettings'
 import type { Profile, Project } from './types'
@@ -48,19 +50,22 @@ function App() {
   }
 
   return (
-    <div className="page">
+    <div className="page" id="page">
       <header className="nav">
-        <a className="mark" href="#top">
-          AP
-        </a>
-        <div className="nav-end">
-          <nav className="nav-links">
-            <a href="#work">Work</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </nav>
-          <ThemeSettings />
+        <div className="nav-container">
+          <a className="mark" href="#page">
+            AP
+          </a>
+          <div className="nav-end">
+            <nav className="nav-links">
+              <a href="#work">Work</a>
+              <a href="#about">About</a>
+              <a href="#contact">Contact</a>
+            </nav>
+            <ThemeSettings />
+          </div>
         </div>
+        <div className="nav-bar"></div>
       </header>
 
       {loadError && <p className="banner">{loadError}</p>}
@@ -85,7 +90,7 @@ function App() {
 
         <section id="work" className="section">
           <div className="section-head">
-            <h2>Selected work</h2>
+            <h2>Sample work</h2>
             <p>
               Loaded from the Express API at <code>/api/projects</code>.
             </p>
@@ -94,6 +99,8 @@ function App() {
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
+            <ForecastCard />
+            <LavaLampCard />
           </Carousel>
         </section>
 
