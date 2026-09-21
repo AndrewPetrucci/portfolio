@@ -1,4 +1,4 @@
-import type { Forecast, Profile, Project } from './types'
+import type { Forecast, NewsFeed, OilPrices, Profile, Project, WikiPreview } from './types'
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, {
@@ -37,6 +37,20 @@ export function getForecast(
     unit,
   })
   return request<Forecast>(`/api/forecast?${params}`)
+}
+
+export function getOilPrices() {
+  return request<OilPrices>('/api/oil')
+}
+
+export function getNews(query: string) {
+  const params = new URLSearchParams({ q: query })
+  return request<NewsFeed>(`/api/news?${params}`)
+}
+
+export function getWikiPreview(url: string) {
+  const params = new URLSearchParams({ url })
+  return request<WikiPreview>(`/api/wiki?${params}`)
 }
 
 export function sendMessage(body: { name: string; email: string; message: string }) {

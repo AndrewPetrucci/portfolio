@@ -41,3 +41,39 @@ export type Forecast = {
   unit: string
   days: ForecastDay[]
 }
+
+export type OilPoint = {
+  date: string
+  price: number
+}
+
+export type OilPrices = {
+  symbol: string
+  latest: number
+  first: number
+  start: string
+  end: string
+  markerDate: string
+  points: OilPoint[]
+}
+
+export type NewsItem = {
+  title: string
+  href: string
+  source: string
+  publishedAt: string
+}
+
+export type NewsFeed = {
+  query: string
+  items: NewsItem[]
+}
+
+export type WikiPreview = {
+  title: string
+  description: string
+  extract: string
+  href: string
+  thumbnail: string
+  updatedAt: string
+}

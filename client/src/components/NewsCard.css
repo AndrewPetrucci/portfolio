@@ -1,0 +1,257 @@
+.news-card {
+  display: flex;
+  flex-direction: column;
+  height: 20rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.news-card::-webkit-scrollbar {
+  display: none;
+}
+
+.news-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.35rem 0.7rem;
+  align-items: start;
+  flex-shrink: 0;
+  min-width: 0;
+  margin-bottom: 0.7rem;
+}
+
+.news-top.has-photo {
+  grid-template-columns: 1fr auto;
+}
+
+.news-intro {
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.news-intro:hover {
+  text-decoration: none;
+}
+
+a.news-intro:hover .news-wiki-kicker {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.news-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.55rem;
+}
+
+.news-head h3 {
+  margin: 0;
+}
+
+.news-wiki-photo,
+.news-wiki-thumb {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 0.4rem;
+}
+
+.news-wiki-photo {
+  flex-shrink: 0;
+  overflow: hidden;
+  background: var(--bg);
+  text-decoration: none;
+}
+
+.news-wiki-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-wiki-body {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.news-wiki-kicker {
+  font-size: 0.72rem;
+}
+
+.news-wiki-extract {
+  grid-column: 1 / -1;
+  min-width: 0;
+  color: var(--ink);
+  font-size: 0.78rem;
+  line-height: 1.1;
+  text-decoration: none;
+}
+
+a.news-wiki-extract:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.news-wiki-meta {
+  grid-column: 1 / -1;
+}
+
+.news-age {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.news-list {
+  display: grid;
+  align-content: start;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.news-list li {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+  animation: news-item-in 0.4s ease;
+}
+
+.news-list a {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.news-item-meta {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+  gap: 0.45rem;
+  overflow: hidden;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.news-source {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.news-source.is-overflowing {
+  mask-image: linear-gradient(90deg, transparent, #000 0.55rem, #000 calc(100% - 0.55rem), transparent);
+}
+
+.news-source-track {
+  display: inline-flex;
+  width: max-content;
+}
+
+.news-source.is-overflowing .news-source-track {
+  animation: news-source-marquee linear infinite;
+}
+
+.news-source.is-overflowing .news-source-copy {
+  padding-right: 1.6em;
+}
+
+.news-item-age {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@keyframes news-source-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.news-skeleton-bone {
+  display: block;
+  border-radius: 0.35rem;
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, var(--ink) 8%, var(--bg-raise)) 36%,
+      color-mix(in srgb, var(--accent) 42%, var(--bg-raise)) 50%,
+      color-mix(in srgb, var(--ink) 8%, var(--bg-raise)) 64%
+    )
+    var(--bg-raise);
+  background-size: 220% 100%;
+  animation: news-skeleton-glow 1.6s ease-in-out infinite;
+}
+
+.news-skeleton-title {
+  width: 92%;
+  height: 0.85em;
+}
+
+.news-skeleton-meta {
+  width: 38%;
+  height: 0.68em;
+}
+
+@keyframes news-skeleton-glow {
+  from {
+    background-position: 120% 0;
+  }
+
+  to {
+    background-position: -120% 0;
+  }
+}
+
+@keyframes news-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .news-list li {
+    animation: none;
+  }
+
+  .news-skeleton-bone {
+    animation: none;
+    background: color-mix(in srgb, var(--ink) 10%, var(--bg-raise));
+  }
+
+  .news-source.is-overflowing {
+    mask-image: none;
+  }
+
+  .news-source.is-overflowing .news-source-track {
+    animation: none;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .news-source.is-overflowing .news-source-copy[aria-hidden='true'] {
+    display: none;
+  }
+}

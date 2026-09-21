@@ -4,6 +4,9 @@ import express from 'express'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { fetchForecast } from './forecast.js'
+import { fetchNews, normalizeQuery } from './news.js'
+import { fetchOilPrices } from './oil.js'
+import { fetchWikiPreview, normalizeWikipediaUrl } from './wiki.js'
 import { profile, projects } from './data/portfolio.js'
 
 dotenv.config()
@@ -65,6 +68,51 @@ app.get('/api/forecast', async (req, res) => {
     res.json(forecast)
   } catch {
     res.status(502).json({ error: 'Could not load the forecast.' })
+  }
+})
+
+app.get('/api/oil', async (_req, res) => {
+  try {
+    const oil = await fetchOilPrices()
+    res.json(oil)
+  } catch {
+    res.status(502).json({ error: 'Could not load oil prices.' })
+  }
+})
+
+app.get('/api/news', async (req, res) => {
+  const query = normalizeQuery(req.query.q)
+
+  if (query.length < 2) {
+    res.status(400).json({ error: 'A news query is required.' })
+    return
+  }
+
+  try {
+    const feed = await fetchNews(query)
+    res.json(feed)
+  } catch {
+    res.status(502).json({ error: 'Could not load the news feed.' })
+  }
+})
+
+app.get('/api/wiki', async (req, res) => {
+  let href = ''
+
+  try {
+    href = normalizeWikipediaUrl(req.query.url)
+  } catch (reason) {
+    res.status(400).json({
+      error: reason instanceof Error ? reason.message : 'A Wikipedia link is required.',
+    })
+    return
+  }
+
+  try {
+    const preview = await fetchWikiPreview(href)
+    res.json(preview)
+  } catch {
+    res.status(502).json({ error: 'Could not load the Wikipedia preview.' })
   }
 })
 

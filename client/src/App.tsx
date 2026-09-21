@@ -4,6 +4,8 @@ import { getProfile, sendMessage } from './api'
 import { Carousel, type CarouselHandle } from './components/Carousel'
 import { ForecastCard } from './components/ForecastCard'
 import { LavaLampCard } from './components/LavaLampCard'
+import { NewsCard } from './components/NewsCard'
+import { OilPricesCard } from './components/OilPricesCard'
 // import { ProjectCard } from './components/ProjectCard'
 import { ThemeSettings } from './components/ThemeSettings'
 import { TwitchSection } from './components/TwitchSection'
@@ -120,6 +122,13 @@ function App() {
             ))} */}
             <ThemeSettings key="theme" />
             <ForecastCard key="forecast" />
+            <OilPricesCard key="oil" />
+            <NewsCard
+              key="news-iran"
+              title="Iran War"
+              query="Iran war when:7d"
+              wikipedia="https://en.wikipedia.org/wiki/2026_Iran_war"
+            />
             <LavaLampCard key="lava" />
           </Carousel>
         </section>

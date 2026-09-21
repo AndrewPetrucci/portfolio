@@ -1,0 +1,135 @@
+.oil-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 18rem;
+  overflow: hidden;
+}
+
+.oil-now {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.oil-now-label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.oil-meta {
+  margin: 0.15rem 0 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.oil-age {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.oil-chart {
+  flex: 1;
+  min-height: 8.5rem;
+}
+
+.oil-chart svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.oil-area {
+  fill: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.oil-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.oil-marker {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.oil-axis {
+  color: var(--muted);
+}
+
+.oil-axis .domain,
+.oil-axis .tick line {
+  stroke: var(--line);
+}
+
+.oil-axis .tick text {
+  fill: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+}
+
+.oil-skeleton {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.45rem;
+}
+
+.oil-skeleton-bone {
+  display: block;
+  border-radius: 0.35rem;
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, var(--ink) 8%, var(--bg-raise)) 36%,
+      color-mix(in srgb, var(--accent) 42%, var(--bg-raise)) 50%,
+      color-mix(in srgb, var(--ink) 8%, var(--bg-raise)) 64%
+    )
+    var(--bg-raise);
+  background-size: 220% 100%;
+  animation: oil-skeleton-glow 1.6s ease-in-out infinite;
+}
+
+.oil-skeleton-price {
+  width: 5.2rem;
+  height: 1.05em;
+}
+
+.oil-skeleton-meta {
+  width: 7.5rem;
+  height: 0.75em;
+}
+
+.oil-skeleton-chart {
+  flex: 1;
+  min-height: 8.5rem;
+  margin-top: 0.2rem;
+}
+
+@keyframes oil-skeleton-glow {
+  from {
+    background-position: 120% 0;
+  }
+
+  to {
+    background-position: -120% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oil-skeleton-bone {
+    animation: none;
+    background: color-mix(in srgb, var(--ink) 10%, var(--bg-raise));
+  }
+}
