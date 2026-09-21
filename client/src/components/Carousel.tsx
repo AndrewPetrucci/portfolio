@@ -130,7 +130,14 @@ export const Carousel = forwardRef<CarouselHandle, CarouselProps>(function Carou
   useLayoutEffect(() => {
     if (!selectedKey || !count) return
     const index = items.findIndex((child, itemIndex) => itemKey(child, itemIndex) === selectedKey)
-    if (index < 0) return
+    if (index < 0) {
+      setIdle(true)
+      setRestoring(false)
+      setActiveIndex(null)
+      setSelectedKey(null)
+      persist({ selectedKey: null })
+      return
+    }
 
     if (skipRestoreRef.current) {
       skipRestoreRef.current = false

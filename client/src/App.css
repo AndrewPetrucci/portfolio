@@ -181,6 +181,7 @@ code {
 .section {
   padding: 2rem 0;
   border-top: 1px solid var(--line);
+  scroll-margin-top: 4.5rem;
 }
 
 .section-head {
@@ -198,8 +199,7 @@ code {
 }
 
 .card,
-.contact,
-.skills > div {
+.contact {
   background: var(--bg-raise);
   border: 1px solid var(--line);
   border-radius: 1rem;
@@ -207,13 +207,11 @@ code {
 }
 
 .card h3,
-.skills h3,
 .contact label {
   margin: 0 0 0.6rem;
 }
 
-.card p,
-.skills li {
+.card p {
   color: var(--muted);
   line-height: 1.5;
 }
@@ -239,17 +237,6 @@ code {
 .card-links {
   display: flex;
   gap: 1rem;
-}
-
-.skills {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-}
-
-.skills ul {
-  margin: 0;
-  padding-left: 1.1rem;
 }
 
 .contact {

@@ -47,10 +47,29 @@
   height: 1.7rem;
 }
 
+.forecast-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin: 0.15rem 0 0.7rem;
+}
+
 .forecast-place {
   margin: 0.15rem 0 0.7rem;
   font-family: var(--mono);
   font-size: 0.75rem;
+}
+
+.forecast-meta .forecast-place {
+  margin: 0;
+}
+
+.forecast-age {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 .forecast-days {

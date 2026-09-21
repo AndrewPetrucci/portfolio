@@ -5,27 +5,28 @@ import { ForecastCard } from './components/ForecastCard'
 import { LavaLampCard } from './components/LavaLampCard'
 import { ProjectCard } from './components/ProjectCard'
 import { ThemeSettings } from './components/ThemeSettings'
+import { TwitchSection } from './components/TwitchSection'
 import type { Profile, Project } from './types'
 import './App.css'
 
 function App() {
   const [profile, setProfile] = useState<Profile | null>(null)
-  const [projects, setProjects] = useState<Project[]>([])
+  // const [projects, setProjects] = useState<Project[]>([])
   const [loadError, setLoadError] = useState('')
   const [status, setStatus] = useState('')
   const [sending, setSending] = useState(false)
   const carouselRef = useRef<CarouselHandle>(null)
 
-  useEffect(() => {
-    Promise.all([getProfile(), getProjects()])
-      .then(([nextProfile, nextProjects]) => {
-        setProfile(nextProfile)
-        setProjects(nextProjects)
-      })
-      .catch(() => {
-        setLoadError('Could not reach the API. Start the server with npm run dev.')
-      })
-  }, [])
+  // useEffect(() => {
+  //   Promise.all([getProfile(), getProjects()])
+  //     .then(([nextProfile, nextProjects]) => {
+  //       setProfile(nextProfile)
+  //       setProjects(nextProjects)
+  //     })
+  //     .catch(() => {
+  //       setLoadError('Could not reach the API. Start the server with npm run dev.')
+  //     })
+  // }, [])
 
   async function handleContact(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -60,7 +61,7 @@ function App() {
           <div className="nav-end">
             <nav className="nav-links">
               <a href="#work">Work</a>
-              <a href="#about">About</a>
+              <a href="#twitch">Twitch</a>
               <a href="#contact">Contact</a>
             </nav>
           </div>
@@ -104,33 +105,16 @@ function App() {
             </p>
           </div>
           <Carousel ref={carouselRef}>
-            {projects.map((project) => (
+            {/* {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
-            ))}
+            ))} */}
             <ThemeSettings key="theme" />
             <ForecastCard key="forecast" />
             <LavaLampCard key="lava" />
           </Carousel>
         </section>
 
-        <section id="about" className="section">
-          <div className="section-head">
-            <h2>About</h2>
-            <p>{profile?.location}</p>
-          </div>
-          <div className="skills">
-            {profile?.skills.map((group) => (
-              <div key={group.group}>
-                <h3>{group.group}</h3>
-                <ul>
-                  {group.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
+        <TwitchSection />
 
         <section id="contact" className="section">
           <div className="section-head">
