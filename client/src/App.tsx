@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { getProfile, getProjects, sendMessage } from './api'
+import { getProfile, sendMessage } from './api'
+// import { getProjects } from './api'
 import { Carousel, type CarouselHandle } from './components/Carousel'
 import { ForecastCard } from './components/ForecastCard'
 import { LavaLampCard } from './components/LavaLampCard'
-import { ProjectCard } from './components/ProjectCard'
+// import { ProjectCard } from './components/ProjectCard'
 import { ThemeSettings } from './components/ThemeSettings'
 import { TwitchSection } from './components/TwitchSection'
-import type { Profile, Project } from './types'
+import type { Profile } from './types'
+// import type { Project } from './types'
 import './App.css'
 
 function App() {
@@ -16,6 +18,14 @@ function App() {
   const [status, setStatus] = useState('')
   const [sending, setSending] = useState(false)
   const carouselRef = useRef<CarouselHandle>(null)
+
+  useEffect(() => {
+    getProfile()
+      .then(setProfile)
+      .catch(() => {
+        setLoadError('Could not reach the API. Start the server with npm run dev.')
+      })
+  }, [])
 
   // useEffect(() => {
   //   Promise.all([getProfile(), getProjects()])
