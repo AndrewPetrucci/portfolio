@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import { fetchForecast } from './forecast.js'
 import { fetchNews, normalizeQuery } from './news.js'
 import { fetchOilPrices } from './oil.js'
+import { fetchWealthDistribution } from './wealth.js'
 import { fetchWikiPreview, normalizeWikipediaUrl } from './wiki.js'
 import { profile, projects } from './data/portfolio.js'
 
@@ -77,6 +78,15 @@ app.get('/api/oil', async (_req, res) => {
     res.json(oil)
   } catch {
     res.status(502).json({ error: 'Could not load oil prices.' })
+  }
+})
+
+app.get('/api/wealth', async (_req, res) => {
+  try {
+    const wealth = await fetchWealthDistribution()
+    res.json(wealth)
+  } catch {
+    res.status(502).json({ error: 'Could not load wealth distribution.' })
   }
 })
 

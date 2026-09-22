@@ -1,5 +1,7 @@
 .carousel-scene {
   position: relative;
+  z-index: 0;
+  isolation: isolate;
   perspective: 80rem;
   perspective-origin: 50% 45%;
   display: grid;

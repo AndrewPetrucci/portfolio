@@ -192,6 +192,11 @@ code {
   margin-bottom: 1.5rem;
 }
 
+#work .section-head {
+  position: relative;
+  z-index: 4;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

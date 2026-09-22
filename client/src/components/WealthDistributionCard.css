@@ -1,0 +1,221 @@
+.wealth-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 18rem;
+  overflow: hidden;
+}
+
+.wealth-meta {
+  margin: 0.15rem 0 0.45rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.wealth-chart {
+  position: relative;
+  flex: 1;
+  min-height: 7.2rem;
+  cursor: crosshair;
+}
+
+.wealth-pin {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.wealth-chart svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wealth-band {
+  stroke: var(--bg-raise);
+  stroke-width: 0.4;
+}
+
+.wealth-band-bottom50 {
+  fill: color-mix(in srgb, var(--muted) 42%, var(--bg-raise));
+}
+
+.wealth-band-next40 {
+  fill: color-mix(in srgb, var(--accent) 22%, var(--bg-raise));
+}
+
+.wealth-band-next9 {
+  fill: color-mix(in srgb, var(--accent) 48%, var(--bg-raise));
+}
+
+.wealth-band-top1 {
+  fill: var(--accent);
+}
+
+.wealth-axis {
+  color: var(--muted);
+}
+
+.wealth-axis .domain,
+.wealth-axis .tick line {
+  stroke: var(--line);
+}
+
+.wealth-axis .tick text {
+  fill: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+}
+
+.wealth-hover[hidden] {
+  display: none;
+}
+
+.wealth-hover-line {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+  pointer-events: none;
+}
+
+.wealth-hover-share {
+  fill: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-variant-numeric: tabular-nums;
+  paint-order: stroke;
+  stroke: var(--bg-raise);
+  stroke-width: 3px;
+  pointer-events: none;
+}
+
+.wealth-hover-share-top1 {
+  fill: var(--accent-ink);
+  stroke: var(--accent);
+}
+
+.wealth-hover-capture {
+  fill: transparent;
+  cursor: crosshair;
+}
+
+.wealth-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.18rem 0.55rem;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wealth-legend li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+.wealth-swatch {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 0.12rem;
+  flex-shrink: 0;
+}
+
+.wealth-swatch[data-band='bottom50'] {
+  background: color-mix(in srgb, var(--muted) 42%, var(--bg-raise));
+}
+
+.wealth-swatch[data-band='next40'] {
+  background: color-mix(in srgb, var(--accent) 22%, var(--bg-raise));
+}
+
+.wealth-swatch[data-band='next9'] {
+  background: color-mix(in srgb, var(--accent) 48%, var(--bg-raise));
+}
+
+.wealth-swatch[data-band='top1'] {
+  background: var(--accent);
+}
+
+.wealth-legend-value {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.wealth-now {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin: 0.4rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.wealth-now-label {
+  margin-right: auto;
+}
+
+.wealth-now time {
+  white-space: nowrap;
+}
+
+.wealth-skeleton {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.45rem;
+}
+
+.wealth-skeleton-bone {
+  display: block;
+  border-radius: 0.35rem;
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, var(--ink) 8%, var(--bg-raise)) 36%,
+      color-mix(in srgb, var(--accent) 42%, var(--bg-raise)) 50%,
+      color-mix(in srgb, var(--ink) 8%, var(--bg-raise)) 64%
+    )
+    var(--bg-raise);
+  background-size: 220% 100%;
+  animation: wealth-skeleton-glow 1.6s ease-in-out infinite;
+}
+
+.wealth-skeleton-meta {
+  width: 8.2rem;
+  height: 0.75em;
+}
+
+.wealth-skeleton-chart {
+  flex: 1;
+  min-height: 7.2rem;
+}
+
+.wealth-skeleton-legend {
+  height: 2.1rem;
+}
+
+@keyframes wealth-skeleton-glow {
+  from {
+    background-position: 120% 0;
+  }
+
+  to {
+    background-position: -120% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wealth-skeleton-bone {
+    animation: none;
+    background: color-mix(in srgb, var(--ink) 10%, var(--bg-raise));
+  }
+}

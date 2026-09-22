@@ -5,7 +5,8 @@ import './NewsCard.css'
 
 const REFRESH_MS = 15 * 60 * 1000
 const AGE_TICK_MS = 15_000
-const ROTATE_MS = 7_000
+const ROTATE_MS = 10_000
+const VISIBLE_ITEMS = 2
 
 export type NewsCardProps = {
   title: string
@@ -139,7 +140,7 @@ export function NewsCard({ title, query, wikipedia }: NewsCardProps) {
 
   useEffect(() => {
     const count = feed?.items.length ?? 0
-    if (count < 2) return
+    if (count <= VISIBLE_ITEMS) return
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (reduceMotion.matches) return
@@ -153,7 +154,11 @@ export function NewsCard({ title, query, wikipedia }: NewsCardProps) {
   }, [feed])
 
   const showWikiPhoto = Boolean(wiki?.thumbnail) || Boolean(wikipedia && !wikiReady)
-  const item = feed?.items[itemIndex]
+  const visibleItems = feed
+    ? Array.from({ length: Math.min(VISIBLE_ITEMS, feed.items.length) }, (_, offset) => {
+        return feed.items[(itemIndex + offset) % feed.items.length]
+      })
+    : []
 
   return (
     <article className="card news-card">
@@ -190,12 +195,12 @@ export function NewsCard({ title, query, wikipedia }: NewsCardProps) {
             <img src={wiki.thumbnail} alt="" width={72} height={72} referrerPolicy="no-referrer" />
           </a>
         )}
-        {wikipedia && !wiki && !wikiReady && (
+        {/* {wikipedia && !wiki && !wikiReady && (
           <span className="news-skeleton-bone news-skeleton-title news-wiki-extract" />
-        )}
+        )} */}
         {wiki && (
           <>
-            <span className="news-wiki-extract">{wiki.extract}</span>
+            {/* <span className="news-wiki-extract">{wiki.extract}</span> */}
             <span className="news-item-meta news-wiki-meta">
               <SourceMarquee text="Wikipedia" delay={0} />
               {wiki.updatedAt && (
@@ -207,7 +212,7 @@ export function NewsCard({ title, query, wikipedia }: NewsCardProps) {
       </div>
       {!feed && !error && <NewsSkeleton />}
       {error && <p>{error}</p>}
-      {feed && item && (
+      {feed && visibleItems.length > 0 && (
         <ul
           className="news-list"
           aria-live="polite"
@@ -218,17 +223,19 @@ export function NewsCard({ title, query, wikipedia }: NewsCardProps) {
             pausedRef.current = false
           }}
         >
-          <li key={item.href}>
-            <a href={item.href} target="_blank" rel="noreferrer">
-              {item.title}
-            </a>
-            <span className="news-item-meta">
-              <SourceMarquee text={item.source} delay={0} />
-              {item.publishedAt && (
-                <span className="news-item-age">{formatArticleAge(item.publishedAt, now)}</span>
-              )}
-            </span>
-          </li>
+          {visibleItems.map((item, index) => (
+            <li key={item.href}>
+              <a href={item.href} target="_blank" rel="noreferrer">
+                {item.title}
+              </a>
+              <span className="news-item-meta">
+                <SourceMarquee text={item.source} delay={index * 1.6} />
+                {item.publishedAt && (
+                  <span className="news-item-age">{formatArticleAge(item.publishedAt, now)}</span>
+                )}
+              </span>
+            </li>
+          ))}
         </ul>
       )}
     </article>
@@ -292,7 +299,7 @@ function SourceMarquee({ text, delay }: { text: string; delay: number }) {
 function NewsSkeleton() {
   return (
     <ul className="news-list news-skeleton" aria-busy="true" aria-label="Loading news">
-      {Array.from({ length: 1 }, (_, index) => (
+      {Array.from({ length: VISIBLE_ITEMS }, (_, index) => (
         <li key={index}>
           <span className="news-skeleton-bone news-skeleton-title" />
           <span className="news-skeleton-bone news-skeleton-meta" />

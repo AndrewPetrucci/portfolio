@@ -57,6 +57,31 @@ export type OilPrices = {
   points: OilPoint[]
 }
 
+export type WealthSharePoint = {
+  date: string
+  quarter: string
+  bottom50: number
+  next40: number
+  next9: number
+  top1: number
+}
+
+export type WealthLatest = {
+  quarter: string
+  bottom50: number
+  next40: number
+  next9: number
+  top1: number
+}
+
+export type WealthDistribution = {
+  source: string
+  start: string
+  end: string
+  latest: WealthLatest
+  points: WealthSharePoint[]
+}
+
 export type NewsItem = {
   title: string
   href: string

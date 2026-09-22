@@ -9,6 +9,7 @@ import { OilPricesCard } from './components/OilPricesCard'
 // import { ProjectCard } from './components/ProjectCard'
 import { ThemeSettings } from './components/ThemeSettings'
 import { TwitchSection } from './components/TwitchSection'
+import { WealthDistributionCard } from './components/WealthDistributionCard'
 import type { Profile } from './types'
 // import type { Project } from './types'
 import './App.css'
@@ -120,8 +121,7 @@ function App() {
             {/* {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))} */}
-            <ThemeSettings key="theme" />
-            <ForecastCard key="forecast" />
+            
             <OilPricesCard key="oil" />
             <NewsCard
               key="news-iran"
@@ -129,11 +129,16 @@ function App() {
               query="Iran war when:7d"
               wikipedia="https://en.wikipedia.org/wiki/2026_Iran_war"
             />
+            
+            <ForecastCard key="forecast" />
+            {/* <WealthDistributionCard key="wealth" /> */}
             <LavaLampCard key="lava" />
+            <ThemeSettings key="theme" />
+            
           </Carousel>
         </section>
 
-        <TwitchSection />
+        {/* <TwitchSection /> */}
 
         <section id="contact" className="section">
           <div className="section-head">
