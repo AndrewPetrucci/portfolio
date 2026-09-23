@@ -1,5 +1,7 @@
 import type {
   Forecast,
+  LayaQuestion,
+  LayaResult,
   NewsFeed,
   OilPrices,
   Profile,
@@ -63,6 +65,13 @@ export function getNews(query: string) {
 export function getWikiPreview(url: string) {
   const params = new URLSearchParams({ url })
   return request<WikiPreview>(`/api/wiki?${params}`)
+}
+
+export function askLaya(body: { state: string; questions: Record<string, LayaQuestion> }) {
+  return request<LayaResult>('/api/laya', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  })
 }
 
 export function sendMessage(body: { name: string; email: string; message: string }) {

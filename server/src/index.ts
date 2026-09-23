@@ -4,6 +4,7 @@ import express from 'express'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { fetchForecast } from './forecast.js'
+import { LayaRequestError, runLaya } from './laya.js'
 import { fetchNews, normalizeQuery } from './news.js'
 import { fetchOilPrices } from './oil.js'
 import { fetchWealthDistribution } from './wealth.js'
@@ -126,6 +127,16 @@ app.get('/api/wiki', async (req, res) => {
   }
 })
 
+app.post('/api/laya', async (req, res) => {
+  try {
+    const result = await runLaya(req.body)
+    res.json(result)
+  } catch (reason) {
+    const message = reason instanceof Error ? reason.message : 'Could not run Laya.'
+    res.status(reason instanceof LayaRequestError ? 400 : 502).json({ error: message })
+  }
+})
+
 app.post('/api/contact', (req, res) => {
   const name = String(req.body?.name ?? '').trim()
   const email = String(req.body?.email ?? '').trim()
@@ -175,6 +186,8 @@ if (isProduction) {
   })
 }
 
-app.listen(port, () => {
-  console.log(`API running on http://localhost:${port}`)
+const host = process.env.HOST || '0.0.0.0'
+
+app.listen(port, host, () => {
+  console.log(`API running on http://${host}:${port}`)
 })

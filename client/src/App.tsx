@@ -4,6 +4,7 @@ import { getProfile, sendMessage } from './api'
 import { Carousel, type CarouselHandle } from './components/Carousel'
 import { ForecastCard } from './components/ForecastCard'
 import { LavaLampCard } from './components/LavaLampCard'
+import { LayaCard } from './components/LayaCard'
 import { NewsCard } from './components/NewsCard'
 import { OilPricesCard } from './components/OilPricesCard'
 // import { ProjectCard } from './components/ProjectCard'
@@ -131,6 +132,7 @@ function App() {
             />
             
             <ForecastCard key="forecast" />
+            <LayaCard key="laya" />
             {/* <WealthDistributionCard key="wealth" /> */}
             <LavaLampCard key="lava" />
             <ThemeSettings key="theme" />

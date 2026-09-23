@@ -170,7 +170,7 @@ export const Carousel = forwardRef<CarouselHandle, CarouselProps>(function Carou
   if (!count) return null
 
   function goTo(index: number, event: MouseEvent<HTMLDivElement>) {
-    if ((event.target as HTMLElement).closest('a, button, input, label')) return
+    if ((event.target as HTMLElement).closest('a, button, input, textarea, select, label')) return
 
     const key = itemKey(items[index], index)
     const target = -((index * 360) / count)

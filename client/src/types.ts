@@ -102,3 +102,25 @@ export type WikiPreview = {
   thumbnail: string
   updatedAt: string
 }
+
+export type LayaQuestionType = 'choice' | 'score' | 'noul'
+
+export type LayaQuestion = {
+  type: LayaQuestionType
+  instructions: string
+  criteria?: Record<string, string> | string[]
+}
+
+export type LayaAnswer = {
+  id: string
+  type: LayaQuestionType
+  value: string
+  confidence: number | null
+}
+
+export type LayaResult = {
+  model: string
+  latencyMs: number
+  source: string
+  answers: LayaAnswer[]
+}

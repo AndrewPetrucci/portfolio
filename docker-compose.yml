@@ -1,0 +1,69 @@
+name: portfolio
+
+services:
+  laya:
+    build:
+      context: ./laya
+    environment:
+      HF_HOME: /models
+      LAYA_SERVE_BACKEND: laya
+      LAYA_SERVE_DEVICE: cpu
+      LAYA_SERVE_PRELOAD: "false"
+      LAYA_SERVE_MAX_LOADED: "1"
+    volumes:
+      - laya-models:/models
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz')",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 36
+      start_period: 180s
+
+  server:
+    build:
+      context: ./server
+    command: sh -c "npm ci && npm run dev"
+    environment:
+      HOST: 0.0.0.0
+      PORT: "3001"
+      CLIENT_ORIGIN: http://localhost:5173
+      LAYA_URL: http://laya:8000
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "300"
+    volumes:
+      - ./server:/app
+      - server_modules:/app/node_modules
+    ports:
+      - "3001:3001"
+    depends_on:
+      - laya
+
+  client:
+    build:
+      context: ./client
+    command: sh -c "npm ci && npm run dev"
+    environment:
+      DOCKER: "1"
+      API_PROXY: http://server:3001
+      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "300"
+    volumes:
+      - ./client:/app
+      - client_modules:/app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+
+volumes:
+  laya-models:
+  client_modules:
+  server_modules:

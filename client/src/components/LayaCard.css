@@ -1,0 +1,136 @@
+.laya-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.laya-card::-webkit-scrollbar {
+  display: none;
+}
+
+.laya-head h3,
+.laya-head p {
+  margin: 0;
+}
+
+.laya-head p {
+  margin: 0.15rem 0 0.55rem;
+  font-size: 0.78rem;
+}
+
+.laya-form {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 0.55rem;
+}
+
+.laya-scenarios {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.3rem;
+}
+
+.laya-scenarios button {
+  padding: 0.28rem 0.2rem;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+}
+
+.laya-scenarios button:hover,
+.laya-scenarios button.is-active {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+.laya-form label {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.laya-state-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--muted);
+}
+
+.laya-form textarea {
+  width: 100%;
+  resize: none;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  padding: 0.45rem 0.55rem;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.laya-card .button {
+  width: fit-content;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+.laya-error {
+  margin: 0 0 0.4rem;
+  font-size: 0.75rem;
+}
+
+.laya-answers {
+  display: grid;
+  gap: 0.28rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.laya-answers li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.35rem;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+}
+
+.laya-answer-id {
+  color: var(--muted);
+  text-transform: lowercase;
+}
+
+.laya-answer-value {
+  color: var(--ink);
+}
+
+.laya-answer-conf {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.laya-meta {
+  margin: 0.45rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.laya-bone {
+  display: block;
+  height: 0.7rem;
+  width: 42%;
+  border-radius: 0.3rem;
+  background: color-mix(in srgb, var(--ink) 10%, var(--bg-raise));
+}
+
+.laya-bone-value {
+  width: 3.2rem;
+  justify-self: end;
+}
