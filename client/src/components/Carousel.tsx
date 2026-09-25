@@ -10,6 +10,8 @@ import {
   type MouseEvent,
   type ReactNode,
 } from 'react'
+import { CarouselActiveContext } from './carouselActive'
+import { pickCarouselFaceIndex } from './carouselHit'
 import './Carousel.css'
 
 const INITIAL_ROTATE_X = -12
@@ -170,7 +172,9 @@ export const Carousel = forwardRef<CarouselHandle, CarouselProps>(function Carou
   if (!count) return null
 
   function goTo(index: number, event: MouseEvent<HTMLDivElement>) {
-    if ((event.target as HTMLElement).closest('a, button, input, textarea, select, label')) return
+    const hit = event.target as HTMLElement
+    if (index === activeIndex && hit.closest('a, button, input, textarea, select, label')) return
+    if (index === activeIndex && hit.closest('canvas, .model-stage')) return
 
     const key = itemKey(items[index], index)
     const target = -((index * 360) / count)
@@ -194,9 +198,26 @@ export const Carousel = forwardRef<CarouselHandle, CarouselProps>(function Carou
     })
   }
 
+  function handleCarouselClick(event: MouseEvent<HTMLDivElement>) {
+    const hit = event.target as HTMLElement
+    if (hit.closest('.carousel-sliders')) return
+
+    const carousel = carouselRef.current
+    if (!carousel) return
+
+    const rects = Array.from(carousel.children, (child) => {
+      const box = (child as HTMLElement).getBoundingClientRect()
+      return { left: box.left, right: box.right, top: box.top, bottom: box.bottom }
+    })
+    const rotateY = idle ? readRotateY(carousel) : theta
+    const index = pickCarouselFaceIndex(rects, rotateY, event.clientX, event.clientY)
+    if (index == null) return
+    goTo(index, event)
+  }
+
   return (
     <div>
-      <div className="carousel-scene">
+      <div className="carousel-scene" onClick={handleCarouselClick}>
         <div
           className="carousel-tilt"
           style={
@@ -228,9 +249,10 @@ export const Carousel = forwardRef<CarouselHandle, CarouselProps>(function Carou
                 key={itemKey(child, index)}
                 className={index === activeIndex ? 'is-active' : undefined}
                 style={{ '--i': index } as CSSProperties}
-                onClick={(event) => goTo(index, event)}
               >
-                {child}
+                <CarouselActiveContext.Provider value={index === activeIndex}>
+                  {child}
+                </CarouselActiveContext.Provider>
               </div>
             ))}
           </div>

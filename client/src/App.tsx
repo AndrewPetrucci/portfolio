@@ -5,6 +5,7 @@ import { Carousel, type CarouselHandle } from './components/Carousel'
 import { ForecastCard } from './components/ForecastCard'
 import { LavaLampCard } from './components/LavaLampCard'
 import { LayaCard } from './components/LayaCard'
+import { ModelCard } from './components/ModelCard'
 import { NewsCard } from './components/NewsCard'
 import { OilPricesCard } from './components/OilPricesCard'
 // import { ProjectCard } from './components/ProjectCard'
@@ -105,7 +106,7 @@ function App() {
 
         <section id="work" className="section">
           <div className="section-head">
-            <h2>Sample work</h2>
+            <h2>Carousel</h2>
             <p>
               <a
                 href="#work"
@@ -133,6 +134,7 @@ function App() {
             
             <ForecastCard key="forecast" />
             <LayaCard key="laya" />
+            <ModelCard key="model" />
             {/* <WealthDistributionCard key="wealth" /> */}
             <LavaLampCard key="lava" />
             <ThemeSettings key="theme" />

@@ -58,7 +58,10 @@
   left: 0;
   top: 0;
   width: var(--item-width);
+  height: 100%;
+  overflow: hidden;
   transform: rotateY(calc(var(--i) * 360deg / var(--n))) translateZ(var(--radius));
+  transform-style: flat;
   cursor: pointer;
 }
 
