@@ -24,6 +24,7 @@ const STORAGE_KEY = 'portfolio-carousel'
 
 type CarouselProps = {
   children: ReactNode
+  center?: ReactNode
 }
 
 export type CarouselHandle = {
@@ -95,7 +96,7 @@ function itemKey(child: ReactNode, index: number) {
 }
 
 export const Carousel = forwardRef<CarouselHandle, CarouselProps>(function Carousel(
-  { children },
+  { children, center },
   ref,
 ) {
   const items = Children.toArray(children)
@@ -200,7 +201,7 @@ export const Carousel = forwardRef<CarouselHandle, CarouselProps>(function Carou
 
   function handleCarouselClick(event: MouseEvent<HTMLDivElement>) {
     const hit = event.target as HTMLElement
-    if (hit.closest('.carousel-sliders')) return
+    if (hit.closest('.carousel-sliders, .carousel-hub')) return
 
     const carousel = carouselRef.current
     if (!carousel) return
@@ -224,6 +225,7 @@ export const Carousel = forwardRef<CarouselHandle, CarouselProps>(function Carou
             {
               '--rx': `${rotateX}deg`,
               '--rz': `${rotateZ}deg`,
+              '--n': count,
             } as CSSProperties
           }
         >
@@ -256,6 +258,11 @@ export const Carousel = forwardRef<CarouselHandle, CarouselProps>(function Carou
               </div>
             ))}
           </div>
+          {center && (
+            <div className="carousel-hub">
+              <CarouselActiveContext.Provider value>{center}</CarouselActiveContext.Provider>
+            </div>
+          )}
         </div>
         <div
           className="carousel-sliders"

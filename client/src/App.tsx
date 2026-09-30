@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { getProfile, sendMessage } from './api'
 // import { getProjects } from './api'
 import { Carousel, type CarouselHandle } from './components/Carousel'
+import { Puzzle } from './components/Puzzle'
 import { ForecastCard } from './components/ForecastCard'
 import { LavaLampCard } from './components/LavaLampCard'
 import { LayaCard } from './components/LayaCard'
@@ -76,6 +77,7 @@ function App() {
           <div className="nav-end">
             <nav className="nav-links">
               <a href="#work">Work</a>
+              <a href="#puzzle">Puzzle</a>
               <a href="#twitch">Twitch</a>
               <a href="#contact">Contact</a>
             </nav>
@@ -140,6 +142,14 @@ function App() {
             <ThemeSettings key="theme" />
             
           </Carousel>
+        </section>
+
+        <section id="puzzle" className="section">
+          <div className="section-head">
+            <h2>Puzzle</h2>
+            <p>A crossword built from today's date.</p>
+          </div>
+          <Puzzle />
         </section>
 
         {/* <TwitchSection /> */}

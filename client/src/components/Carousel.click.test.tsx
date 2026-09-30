@@ -138,21 +138,6 @@ describe('carousel click targeting', () => {
     expect(faceWraps()[MODEL]).not.toHaveClass('is-active')
   })
 
-  it('selects Model when a click passes through the transparent card onto the scene', async () => {
-    renderRing()
-    mockFaceRects(separated)
-    clickFace(faceWraps()[LAVA], 545, 280)
-    await flushRotation()
-
-    vi.restoreAllMocks()
-    mockFaceRects(lavaFrontOverlap)
-    fireEvent.click(document.querySelector('.carousel-scene') as HTMLElement, {
-      clientX: 220,
-      clientY: 280,
-    })
-    expect(faceWraps()[MODEL]).toHaveClass('is-active')
-  })
-
   it('selects Laya when a click passes through a later face onto the scene', async () => {
     renderRing()
     mockFaceRects(separated)

@@ -1,0 +1,39 @@
+.model-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  /* Spread paints the card frame. The stage box itself stays clear. */
+  box-shadow: 0 0 0 8rem var(--bg-raise);
+  contain: layout paint;
+  transform: translateZ(0);
+  transform-style: flat;
+}
+
+.model-stage > div,
+.model-canvas {
+  pointer-events: none !important;
+}
+
+.model-stage > div {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent;
+  border-radius: 0;
+}
+
+.model-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.carousel > *.is-active .model-stage {
+  touch-action: none;
+}
